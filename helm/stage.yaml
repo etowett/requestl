@@ -1,0 +1,54 @@
+replicaCount: 1
+
+image:
+  repository: 240603544178.dkr.ecr.eu-west-3.amazonaws.com/requestl
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: "requestl"
+fullnameOverride: "requestl"
+
+serviceAccount:
+  create: false
+
+podSecurityContext: {}
+
+securityContext: {}
+
+persistence:
+  enabled: false
+
+containerPort: 3010
+containerName: http
+
+service:
+  type: ClusterIP
+  port: 3010
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer"
+    kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: stage-requestl.tolanix.xyz
+      paths:
+        - "/"
+  tls:
+    - secretName: stage-requestl-tls
+      hosts:
+        - stage-requestl.tolanix.xyz
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+  PORT: "3010"
+  ENV: stage

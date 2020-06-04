@@ -1,0 +1,6 @@
+FROM iron/go:1.10.2
+RUN apk update && \
+    apk add mailcap tzdata && \
+    rm /var/cache/apk/*
+COPY requestl /usr/bin
+CMD ["requestl"]
