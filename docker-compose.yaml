@@ -5,5 +5,9 @@ services:
     image: ektowett/requestl:latest
     ports:
       - 7000:7000
+    env_file:
+      - .env
     environment:
       - PORT=7000
+      - DATA_QUEUE=data-queue
+

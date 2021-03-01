@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:1.15-alpine as builder
+FROM golang:1.16.0-alpine as builder
 RUN apk add git bash
 WORKDIR /app
 COPY go.mod go.sum ./
@@ -8,7 +8,7 @@ COPY . .
 RUN ./build.sh
 
 # Run image
-FROM iron/go:1.10.2
+FROM alpine:3.13.2
 RUN apk update && \
     apk add mailcap tzdata && \
     rm /var/cache/apk/*

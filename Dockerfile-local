@@ -1,4 +1,4 @@
-FROM iron/go:1.10.2
+FROM alpine:3.13.2
 RUN apk update && \
     apk add mailcap tzdata && \
     rm /var/cache/apk/*
